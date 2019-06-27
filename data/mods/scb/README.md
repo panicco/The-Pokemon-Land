@@ -199,7 +199,7 @@ Ability: Prankster
 ### Abby
 ![Abby](http://play.pokemonshowdown.com/sprites/xyani/altaria.gif)
 
-Abby (F) @ **Mystic Water**
+Altaria (F) @ **Mystic Water**
 
 **Mystic Water:** Modified existing item. If held by an Altaria, this item allows it to Mega Evolve in battle.
 
@@ -215,6 +215,82 @@ Mega Ability: Liquid Voice
 - **Mermaid Whirl**
 
 **Mermaid Whirl:** ![Water-type](http://play.pokemonshowdown.com/sprites/types/Water.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 80 BP | 90 Acc | 15 PP | Summons Rain Dance after doing damage. If both the user and the target have not fainted, the target is forced to switch out and be replaced with a random unfainted ally. This effect fails if the target is under the effect of Ingrain, has the Suction Cups Ability, or this move hit a substitute.
+
+### Nappa
+![Nappa](http://play.pokemonshowdown.com/sprites/xyani-shiny/gallade.gif)
+
+Gallade (M) @ Life Orb
+
+Shiny: Yes
+
+EVs: ATK: 252, SPE: 4, SPA: 252, Nature: Adamant
+
+Ability: **Hero\'s Will**
+
+**Hero\'s Will:** If this Pokemon is a Gallade, it will transform into Mega Gallade before using a physical or special attack. After using the attack, if this Pokemon was originally in its base forme, it will transform back into Gallade.
+
+- Blaze Kick / Thunder Punch
+- Psycho Cut
+- Shift Gear
+- **Hero's Sword**
+
+**Hero's Sword:** ![Fighting-type](http://play.pokemonshowdown.com/sprites/types/Fighting.png)| ![Physical Move](http://play.pokemonshowdown.com/sprites/categories/Physical.png) | 75 BP | 100 Acc | 5 PP | Ignores the target's stat stage changes, including evasiveness. This move's type effectiveness against Ghost is changed to be super effective no matter what this move's type is.
+
+### Gidget
+![Gidget](http://play.pokemonshowdown.com/sprites/xyani/ditto.gif)
+
+Ditto (F) @ Metal Powder
+
+EVs: HP: 252, SPA: 4, SPE: 252, Nature: Timid
+
+Ability: Limber
+
+Innate Ability: **Assuming the Form**
+
+**Assuming the Form:** Upon switching in, Ditto automatically transforms into one of the fully-evolved starter Pokémon with different movesets, but retains the Limber ability.
+
+- Transform
+- Baton Pass
+- Psych Up
+- **Gidgetblast**
+
+**Gidgetblast:** ![Normal-type](http://play.pokemonshowdown.com/sprites/types/Normal.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 100 BP | 100 Acc | 5 PP | This move's type changes to match the user's primary type. Has a 30% chance to lower the target's Special Defense by 1 stage.
+
+### Sedna
+![Sedna](http://play.pokemonshowdown.com/sprites/xyani/marill.gif)
+
+Marill (F) @ Sitrus Berry
+
+EVs: SPA: 252, SPE: 4, ATK: 252, Nature: Quiet
+
+Ability: Air Lock
+
+- Play Rough / Dazzling Gleam
+- Dragon Pulse
+- Aqua Tail / Surf
+- **Sky Dance**
+
+**Sky Dance:** ![Flying-type](http://play.pokemonshowdown.com/sprites/types/Flying.png)| ![Status Move](http://play.pokemonshowdown.com/sprites/categories/Status.png) | Can't miss | 25 PP | Raises the user's Attack, Special Attack, and Speed by 1 stage.
+
+### Skyla
+![Skyla](http://play.pokemonshowdown.com/sprites/xyani-shiny/lugia.gif)
+
+Lugia (F) @ Leftovers
+
+EVs: DEF: 252, SPA: 4, SPD: 252, Nature: Lax
+
+Shiny: Yes
+
+Ability: **Psychic Shield**
+
+**Psychic Shield:** This Pokemon cannot be afficted with status conditions, Taunt and Attract and prevents other Pokemon from lowering this Pokemon's stat stages.
+
+- Aeroblast
+- Dazzling Gleam / Psychic / Water Pulse
+- Quiver Dance / Calm Mind
+- **Lugia's Song**
+
+**Lugia's Song:** ![Psychic-type](http://play.pokemonshowdown.com/sprites/types/Psychic.png)| ![Status Move](http://play.pokemonshowdown.com/sprites/categories/Status.png) | Can't miss | 40 PP | Lowers the user's Speed by 1 stage. Raises the user's Defense and Special Defense by 2 stages.
 
 ------------------------------------------------------------------------
 More Coming Soon.

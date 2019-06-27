@@ -108,7 +108,7 @@ class randomSCBTeams extends RandomTeams {
 				evs: {hp: 252, spa: 4, spe: 252}, nature: 'Timid',
 			},
            'Sedna': {
-				species: 'Marill', ability: 'Air Lock', item: 'Terrain Extender', gender: 'F',
+				species: 'Marill', ability: 'Air Lock', item: 'Sitrus Berry', gender: 'F',
 				moves: [['Play Rough', 'Dazzling Gleam'], 'Dragon Pulse', ['Aqua Tail', 'Surf']],
 				signatureMove: 'Sky Dance',
 				evs: {spa: 252, spe: 4, atk: 252}, nature: 'Quiet',
