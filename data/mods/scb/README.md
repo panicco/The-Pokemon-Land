@@ -4,7 +4,7 @@ Sets and Roster (WIP)
 ------------------------------------------------------------------------
 
 ### Static
-![Static](http://www.smogon.com/dex/media/sprites/xyani/pikachu.gif)
+![Static](http://play.pokemonshowdown.com/sprites/xyani/pikachu.gif)
 
 Pikachu (M) @ Zap Plate
 
@@ -20,7 +20,7 @@ EVs: SPA: 252, SPD: 4, SPE: 252,  Nature: Modest
 **Pika Power!:** ![Electric-type](http://play.pokemonshowdown.com/sprites/types/Electric.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 90 BP | 85 Acc | 10 PP | Raises the user's Speed by 1 stage if this move knocks out the target.
 
 ### Erika
-![Erika](http://www.smogon.com/dex/media/sprites/xyani/eevee.gif)
+![Erika](http://play.pokemonshowdown.com/sprites/xyani/eevee.gif)
 
 Eevee (F) @ Leftovers
 
@@ -36,7 +36,7 @@ Ability: Adaptability
 **Evo-Impact:** ![Normal-type](http://play.pokemonshowdown.com/sprites/types/Normal.png)| ![Status Move](http://play.pokemonshowdown.com/sprites/categories/Status.png) | Can't miss | 10 PP | The user transforms into a different Pokemon, and it uses a move dependent on the Pokemon: Vaporeon (Water Pulse), Jolteon (Thunderbolt), Flareon (Flamethrower), Espeon (Psychic), Umbreon (Dark Pulse), Leafeon (Leaf Storm), Glaceon (Ice Beam), and Sylveon (Moonblast). Reverts to an Eevee at the end of the turn.
 
 ### Aqua
-![Aqua](http://www.smogon.com/dex/media/sprites/xyani-shiny/mew.gif)
+![Aqua](http://play.pokemonshowdown.com/sprites/xyani-shiny/mew.gif)
 
 Mew (M) @ Leftovers
 
@@ -54,7 +54,7 @@ Ability: Primordial Sea
 **Aqua Sphere:** ![Water-type](http://play.pokemonshowdown.com/sprites/types/Water.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 95 BP | 100 Acc | 15 PP | Has a 50% chance to lower the target's Special Attack by 2 stages.
 
 ### Mizzy
-![Mizzy](http://www.smogon.com/dex/media/sprites/xyani/wigglytuff.gif)
+![Mizzy](http://play.pokemonshowdown.com/sprites/xyani/wigglytuff.gif)
 
 Wigglytuff (F) @ Expert Belt
 
@@ -72,7 +72,7 @@ Innate Ability: Prism Armor
 **Prism Rocket:** ![Psychic-type](http://play.pokemonshowdown.com/sprites/types/Psychic.png)| ![Physical Move](http://play.pokemonshowdown.com/sprites/categories/Physical.png) | 85 BP | 95 Acc | 20 PP | This move is a special attack if the user's Special Attack stat is greater than its Attack stat; otherwise, it is a physical attack. 50% chance to lower the target's Speed. This move is super-effective against any type. This move and its effects ignore the Abilities of other Pokemon.
 
 ### Zena
-![Zena](http://www.smogon.com/dex/media/sprites/xyani/zygarde.gif)
+![Zena](http://play.pokemonshowdown.com/sprites/xyani/zygarde.gif)
 
 Zygarde (F) @ Leftovers
 
@@ -88,7 +88,7 @@ Ability: Power Construct
 **Titan Force:** ![Ground-type](http://play.pokemonshowdown.com/sprites/types/Ground.png)| ![Physical Move](http://play.pokemonshowdown.com/sprites/categories/Physical.png) | 130 BP | 100 Acc | 5 PP | Fails unless the user is a Ground type. If this move is successful, the user's Ground type becomes typeless as long as it remains active. Has a 100% chance to lower the target's Attack by 2 stages.
 
 ### Kyle
-![Kyle](http://www.smogon.com/dex/media/sprites/xyani/cacturne.gif)
+![Kyle](http://play.pokemonshowdown.com/sprites/xyani/cacturne.gif)
 
 Cacturne (M) @ Big Root
 
@@ -106,7 +106,7 @@ Ability: **Desert Cactus**
 **Desert Drain:** ![Ground-type](http://play.pokemonshowdown.com/sprites/types/Ground.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 75 BP | 100 Acc | 15 PP | The user recovers 1/2 the HP lost by the target, rounded half up. If Big Root is held by the user, the HP recovered is 1.3x normal, rounded half down.
 
 ### Serene Star
-![Serene Star](http://www.smogon.com/dex/media/sprites/xyani/sandslash-alola.gif)
+![Serene Star](http://play.pokemonshowdown.com/sprites/xyani-shiny/sandslash-alola.gif)
 
 Sandslash-Alola (F) @ Icy Rock
 
@@ -126,7 +126,7 @@ Ability: **Snow Power!**
 **Snow Dance:** ![Ice-type](http://play.pokemonshowdown.com/sprites/types/Ice.png)| ![Physical Move](http://play.pokemonshowdown.com/sprites/categories/Physical.png) | 80 BP | 100 Acc | 10 PP | Has a 50% chance to raise the user's Attack by 1 stage.
 
 ### Goby
-![Goby](http://www.smogon.com/dex/media/sprites/xyani/dedenne.gif)
+![Goby](http://play.pokemonshowdown.com/sprites/xyani/dedenne.gif)
 
 Goby (M) @ Red Card
 
@@ -142,7 +142,7 @@ Ability: Simple
 **Electro Flash:** ![Electric-type](http://play.pokemonshowdown.com/sprites/types/Electric.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 75 BP | 90 Acc | 15 PP | Has a 100% chance to raise the user's Special Attack by 1 stage.
 
 ### The Hound
-![The Hound](http://www.smogon.com/dex/media/sprites/xyani/houndoom.gif)
+![The Hound](http://play.pokemonshowdown.com/sprites/xyani/houndoom.gif)
 
 The Hound (F) @ Houndoominite
 
@@ -160,7 +160,7 @@ Mega Ability: Solar Power
 **Dark Flare:** ![Dark-type](http://play.pokemonshowdown.com/sprites/types/Dark.png)| ![Special Move](http://play.pokemonshowdown.com/sprites/categories/Special.png) | 130 BP | 85 Acc | 10 PP | Summons Sunny Day after doing damage and combines Fire in its type effectiveness against the target.
 
 ### Felix
-![Felix](http://www.smogon.com/dex/media/sprites/xyani/meowth.gif)
+![Felix](http://play.pokemonshowdown.com/sprites/xyani/meowth.gif)
 
 Meowth (F) @ **Felixium Z**
 
@@ -181,7 +181,7 @@ Ability: **Lucky Number Seven**
 **The Magic Bag of Tricks:** ![Normal-type](http://play.pokemonshowdown.com/sprites/types/Normal.png)| ![Status Move](http://play.pokemonshowdown.com/sprites/categories/Status.png) | Can't miss | 1 PP | Causes the target to become confused and raises the user's Attack, Defense, Special Attack, Special Defense, Speed, Accuracy, and Evasion by 2 stages. | Z-Move
 
 ### Chuck
-![Chuck](http://www.smogon.com/dex/media/sprites/xyani/skuntank.gif)
+![Chuck](http://play.pokemonshowdown.com/sprites/xyani/skuntank.gif)
 
 Skuntank (M) @ **Air Balloon**
 
@@ -197,7 +197,7 @@ Ability: Prankster
 **Frenzy Dance:** ![Dark-type](http://play.pokemonshowdown.com/sprites/types/Dark.png)| ![Physical Move](http://play.pokemonshowdown.com/sprites/categories/Physical.png) | 95 BP | 100 Acc | 20 PP | Has a 30% chance to lower the target's Defense by 2 stages.
 
 ### Abby
-![Abby](http://www.smogon.com/dex/media/sprites/xyani/altaria.gif)
+![Abby](http://play.pokemonshowdown.com/sprites/xyani/altaria.gif)
 
 Abby (F) @ **Mystic Water**
 
