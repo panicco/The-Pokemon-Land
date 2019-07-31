@@ -1,0 +1,2 @@
+node pokemon-showdown
+PAUSE

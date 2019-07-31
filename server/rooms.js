@@ -22,8 +22,7 @@ const LAST_BATTLE_WRITE_THROTTLE = 10;
 /** @type {null} */
 const RETRY_AFTER_LOGIN = null;
 
-/** @type {typeof import('../lib/fs').FS} */
-const FS = require(/** @type {any} */('../.lib-dist/fs')).FS;
+const FS = require('../lib/fs');
 const Roomlogs = require('./roomlogs');
 
 /*********************************************************
@@ -113,9 +112,6 @@ class BasicRoom {
 		this.filterCaps = false;
 		this.mafiaEnabled = false;
 		this.unoDisabled = false;
-		/** @type {'%' | boolean} */
-		this.toursEnabled = false;
-		this.tourAnnouncements = false;
 		/** @type {Set<string>?} */
 		this.privacySetter = null;
 		/** @type {Map<string, ChatRoom>?} */
@@ -466,7 +462,7 @@ class GlobalRoom extends BasicRoom {
 				Monitor.warn(`ERROR: Room number ${i} has no data and could not be loaded.`);
 				continue;
 			}
-			let id = toID(chatRoomData.title);
+			let id = toId(chatRoomData.title);
 			Monitor.notice("NEW CHATROOM: " + id);
 			let room = Rooms.createChatRoom(id, chatRoomData.title, chatRoomData);
 			if (room.aliases) {
@@ -487,7 +483,7 @@ class GlobalRoom extends BasicRoom {
 			// Prevent there from being two possible hidden classes an instance
 			// of GlobalRoom can have.
 			// @ts-ignore
-			this.ladderIpLog = new (require(/** @type {any} */('../.lib-dist/streams'))).WriteStream({write() {}});
+			this.ladderIpLog = new (require('../lib/streams')).WriteStream({write() {}});
 		}
 
 		let lastBattle;
@@ -712,7 +708,7 @@ class GlobalRoom extends BasicRoom {
 	 * @param {string} title
 	 */
 	addChatRoom(title) {
-		let id = toID(title);
+		let id = toId(title);
 		if (id === 'battles' || id === 'rooms' || id === 'ladder' || id === 'teambuilder' || id === 'home' || id === 'all' || id === 'public') return false;
 		if (Rooms.rooms.has(id)) return false;
 
@@ -731,7 +727,7 @@ class GlobalRoom extends BasicRoom {
 	 */
 	prepBattleRoom(format) {
 		//console.log('BATTLE START BETWEEN: ' + p1.userid + ' ' + p2.userid);
-		let roomPrefix = `battle-${toID(Dex.getFormat(format).name)}-`;
+		let roomPrefix = `battle-${toId(Dex.getFormat(format).name)}-`;
 		let battleNum = this.lastBattle;
 		let roomid;
 		do {
@@ -744,23 +740,25 @@ class GlobalRoom extends BasicRoom {
 	}
 
 	/**
-	 * @param {User[]} players
+	 * @param {User} p1
+	 * @param {User} p2
 	 * @param {GameRoom} room
 	 * @param {AnyObject} options
 	 */
-	onCreateBattleRoom(players, room, options) {
+	onCreateBattleRoom(p1, p2, room, options) {
 		if (Config.reportbattles) {
 			let reportRoom = Rooms(Config.reportbattles === true ? 'lobby' : Config.reportbattles);
 			if (reportRoom) {
-				const reportPlayers = players.map(p => p.getIdentity()).join('|');
 				reportRoom
-					.add(`|b|${room.id}|${reportPlayers}`)
+					.add(`|b|${room.id}|${p1.getIdentity()}|${p2.getIdentity()}`)
 					.update();
 			}
 		}
 		if (Config.logladderip && options.rated) {
-			const ladderIpLogString = players.map(p => `${p.userid}: ${p.latestIp}\n`).join('');
-			this.ladderIpLog.write(ladderIpLogString);
+			this.ladderIpLog.write(
+				`${p1.userid}: ${p1.latestIp}\n` +
+				`${p2.userid}: ${p2.latestIp}\n`
+			);
 		}
 	}
 
@@ -768,7 +766,7 @@ class GlobalRoom extends BasicRoom {
 	 * @param {string} id
 	 */
 	deregisterChatRoom(id) {
-		id = toID(id);
+		id = toId(id);
 		let room = Rooms(id);
 		if (!room) return false; // room doesn't exist
 		if (!room.chatRoomData) return false; // room isn't registered
@@ -777,7 +775,7 @@ class GlobalRoom extends BasicRoom {
 		// assumption is that more recently added rooms are more likely to
 		// be deleted
 		for (let i = this.chatRoomDataList.length - 1; i >= 0; i--) {
-			if (id === toID(this.chatRoomDataList[i].title)) {
+			if (id === toId(this.chatRoomDataList[i].title)) {
 				this.chatRoomDataList.splice(i, 1);
 				this.writeChatRoomData();
 				break;
@@ -790,7 +788,7 @@ class GlobalRoom extends BasicRoom {
 	 * @param {string} id
 	 */
 	delistChatRoom(id) {
-		id = toID(id);
+		id = toId(id);
 		if (!Rooms.rooms.has(id)) return false; // room doesn't exist
 		for (let i = this.chatRooms.length - 1; i >= 0; i--) {
 			if (id === this.chatRooms[i].id) {
@@ -803,7 +801,7 @@ class GlobalRoom extends BasicRoom {
 	 * @param {string} id
 	 */
 	removeChatRoom(id) {
-		id = toID(id);
+		id = toId(id);
 		let room = Rooms(id);
 		if (!room) return false; // room doesn't exist
 		room.destroy();
@@ -860,7 +858,8 @@ class GlobalRoom extends BasicRoom {
 	 * @param {Connection} connection
 	 */
 	onConnect(user, connection) {
-		connection.send(user.getUpdateuserText() + '\n' + this.configRankList + this.formatListText);
+		let initdata = '|updateuser|' + user.name + '|' + (user.named ? '1' : '0') + '|' + user.avatar + '\n';
+		connection.send(initdata + this.configRankList + this.formatListText);
 	}
 	/**
 	 * @param {User} user
@@ -1062,10 +1061,6 @@ class BasicChatRoom extends BasicRoom {
 		this.banwordRegex = null;
 		/** @type {string[]} */
 		this.banwords = [];
-
-		/** @type {number?} */
-		// Only available in groupchats
-		this.uptime = null;
 
 		this.chatRoomData = (options.isPersonal ? null : options);
 		Object.assign(this, options);
@@ -1325,13 +1320,9 @@ class BasicChatRoom extends BasicRoom {
 	 * @param {User} user
 	 */
 	onUpdateIdentity(user) {
-		if (user && user.connected) {
+		if (user && user.connected && user.named) {
 			if (!this.users[user.userid]) return false;
-			if (user.named) {
-				this.reportJoin('n', user.getIdentity(this.id) + '|' + user.userid);
-			} else {
-				this.reportJoin('l', user.userid);
-			}
+			this.reportJoin('n', user.getIdentity(this.id) + '|' + user.userid);
 		}
 		return true;
 	}
@@ -1461,8 +1452,6 @@ class GameRoom extends BasicChatRoom {
 
 		this.p1 = options.p1 || null;
 		this.p2 = options.p2 || null;
-		this.p3 = options.p3 || null;
-		this.p4 = options.p4 || null;
 
 		/**
 		 * The lower player's rating, for searching purposes.
@@ -1477,10 +1466,10 @@ class GameRoom extends BasicChatRoom {
 		this.game = null;
 	}
 	/**
-	 * - logNum = 0          : spectator log (no exact HP)
-	 * - logNum = 1, 2, 3, 4 : player log (exact HP for that player)
-	 * - logNum = -1         : debug log (exact HP for all players)
-	 * @param {-1 | 0 | 1 | 2 | 3 | 4} channel
+	 * - logNum = 0    : spectator log (no exact HP)
+	 * - logNum = 1, 2 : player log (exact HP for that player)
+	 * - logNum = 3    : debug log (exact HP for all players)
+	 * @param {0 | 1 | 2 | 3} channel
 	 */
 	getLog(channel = 0) {
 		return this.log.getScrollback(channel);
@@ -1489,9 +1478,8 @@ class GameRoom extends BasicChatRoom {
 	 * @param {User} user
 	 */
 	getLogForUser(user) {
-		if (!(user.userid in this.game.playerTable)) return this.getLog();
-		// @ts-ignore
-		return this.getLog(this.game.playerTable[user.userid].num);
+		if (!(user.userid in this.game.players)) return this.getLog();
+		return this.getLog(this.game.players[user.userid].slotNum + 1);
 	}
 	/**
 	 * @param {User?} excludeUser
@@ -1586,7 +1574,7 @@ let Rooms = Object.assign(getRoom, {
 	 * @return {Room | undefined}
 	 */
 	search(name) {
-		return getRoom(name) || getRoom(toID(name)) || getRoom(Rooms.aliases.get(toID(name)));
+		return getRoom(name) || getRoom(toId(name)) || getRoom(Rooms.aliases.get(toId(name)));
 	},
 
 	/**
@@ -1617,76 +1605,55 @@ let Rooms = Object.assign(getRoom, {
 	 * @param {AnyObject} options
 	 */
 	createBattle(formatid, options) {
-		/** @type {(User & {specialNextBattle: boolean})[]} */
-		const players = [options.p1, options.p2, options.p3, options.p4].filter(user => user);
-		const gameType = Dex.getFormat(formatid).gameType;
-		if (gameType !== 'multi' && gameType !== 'free-for-all') {
-			if (players.length > 2) {
-				throw new Error(`Four players were provided, but the format is a two-player format.`);
-			}
-		}
-		if (new Set(players).size < players.length) {
-			throw new Error(`Players can't battle themselves`);
-		}
-
-		for (const user of players) {
-			Ladders.cancelSearches(user);
-		}
+		const p1 = /** @type {User?} */ (options.p1);
+		const p2 = /** @type {User?} */ (options.p2);
+		if (p1 && p1 === p2) throw new Error(`Players can't battle themselves`);
+		if (p1) Ladders.cancelSearches(p1);
+		if (p2) Ladders.cancelSearches(p2);
 
 		if (Rooms.global.lockdown === true) {
-			for (const user of players) {
-				user.popup("The server is restarting. Battles will be available again in a few minutes.");
-			}
+			if (p1) p1.popup("The server is restarting. Battles will be available again in a few minutes.");
+			if (p2) p2.popup("The server is restarting. Battles will be available again in a few minutes.");
 			return;
 		}
 
-		if (players.some(user => user.specialNextBattle)) {
-			const p1Special = players[0].specialNextBattle;
-			let mismatch = `"${p1Special}"`;
-			for (const user of players) {
-				if (user.specialNextBattle !== p1Special) {
-					mismatch += ` vs. "${user.specialNextBattle}"`;
-					break;
-				}
-			}
-			if (mismatch !== `"${p1Special}"`) {
-				for (const user of players) {
-					user.popup(`Your special battle settings don't match: ${mismatch}`);
-				}
+		// @ts-ignore
+		if (p1 && p2 && (p1.specialNextBattle || p2.specialNextBattle)) {
+			// @ts-ignore
+			const p1special = p1.specialNextBattle, p2special = p2.specialNextBattle;
+			// @ts-ignore
+			p1.specialNextBattle = null;
+			// @ts-ignore
+			p2.specialNextBattle = null;
+
+			if (p1special !== p2special) {
+				p1.popup(`Your special battle settings don't match: "${p1special}" and "${p2special}"`);
+				p2.popup(`Your special battle settings don't match: "${p1special}" and "${p2special}"`);
 				return;
 			}
-			options.ratedMessage = p1Special;
+			options.ratedMessage = p1special;
 		}
 
 		const roomid = Rooms.global.prepBattleRoom(formatid);
 		options.format = formatid;
-		// options.rated is a number representing the lowest player rating, for searching purposes
+		// options.rated is a number representing the lower player rating, for searching purposes
 		// options.rated < 0 or falsy means "unrated", and will be converted to 0 here
 		// options.rated === true is converted to 1 (used in tests sometimes)
 		options.rated = Math.max(+options.rated || 0, 0);
-		const p1 = players[0];
-		const p2 = players[1];
 		const p1name = p1 ? p1.name : "Player 1";
 		const p2name = p2 ? p2.name : "Player 2";
-		let roomTitle;
-		if (gameType === 'multi') {
-			roomTitle = `Team ${p1name} vs. Team ${p2name}`;
-		} else if (gameType === 'free-for-all') {
-			// p1 vs. p2 vs. p3 vs. p4 is too long of a title
-			roomTitle = `${p1name} and friends`;
-		} else {
-			roomTitle = `${p1name} vs. ${p2name}`;
-		}
-		const room = Rooms.createGameRoom(roomid, roomTitle, options);
+		const room = Rooms.createGameRoom(roomid, "" + p1name + " vs. " + p2name, options);
 		// @ts-ignore TODO: make RoomBattle a subclass of RoomGame
 		room.game = new Rooms.RoomBattle(room, formatid, options);
 
 		let inviteOnly = (options.inviteOnly || []);
-		for (const user of players) {
-			if (user.inviteOnlyNextBattle) {
-				inviteOnly.push(user.userid);
-				user.inviteOnlyNextBattle = false;
-			}
+		if (p1 && p1.inviteOnlyNextBattle) {
+			inviteOnly.push(p1.userid);
+			p1.inviteOnlyNextBattle = false;
+		}
+		if (p2 && p2.inviteOnlyNextBattle) {
+			inviteOnly.push(p2.userid);
+			p2.inviteOnlyNextBattle = false;
 		}
 		if (options.tour && !room.tour.modjoin) inviteOnly = [];
 		if (inviteOnly.length) {
@@ -1696,13 +1663,10 @@ let Rooms = Object.assign(getRoom, {
 			room.add(`|raw|<div class="broadcast-red"><strong>This battle is invite-only!</strong><br />Users must be rank + or invited with <code>/invite</code> to join</div>`);
 		}
 
-		for (const p of players) {
-			if (p) {
-				p.joinRoom(room);
-				Monitor.countBattle(p.latestIp, p.name);
-			}
-		}
-
+		if (p1) p1.joinRoom(room);
+		if (p2) p2.joinRoom(room);
+		if (p1) Monitor.countBattle(p1.latestIp, p1.name);
+		if (p2) Monitor.countBattle(p2.latestIp, p2.name);
 		return room;
 	},
 

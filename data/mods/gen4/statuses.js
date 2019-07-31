@@ -1,10 +1,10 @@
 'use strict';
 
-/**@type {{[k: string]: ModdedPureEffectData}} */
+/**@type {{[k: string]: ModdedEffectData}} */
 let BattleStatuses = {
 	par: {
 		inherit: true,
-		onBeforeMove(pokemon) {
+		onBeforeMove: function (pokemon) {
 			if (!pokemon.hasAbility('magicguard') && this.randomChance(1, 4)) {
 				this.add('cant', pokemon, 'par');
 				return false;
@@ -16,17 +16,13 @@ let BattleStatuses = {
 		id: 'slp',
 		num: 0,
 		effectType: 'Status',
-		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Move') {
-				this.add('-status', target, 'slp', '[from] move: ' + sourceEffect.name);
-			} else {
-				this.add('-status', target, 'slp');
-			}
+		onStart: function (target) {
+			this.add('-status', target, 'slp');
 			// 1-4 turns
 			this.effectData.time = this.random(2, 6);
 		},
 		onBeforeMovePriority: 10,
-		onBeforeMove(pokemon, target, move) {
+		onBeforeMove: function (pokemon, target, move) {
 			if (pokemon.hasAbility('earlybird')) {
 				pokemon.statusData.time--;
 			}
@@ -44,7 +40,7 @@ let BattleStatuses = {
 	},
 	frz: {
 		inherit: true,
-		onBeforeMove(pokemon, target, move) {
+		onBeforeMove: function (pokemon, target, move) {
 			if (this.randomChance(1, 5)) {
 				pokemon.cureStatus();
 				return;
@@ -53,9 +49,6 @@ let BattleStatuses = {
 			this.add('cant', pokemon, 'frz');
 			return false;
 		},
-	},
-	substitutebroken: {
-		noCopy: true,
 	},
 	trapped: {
 		inherit: true,
@@ -67,7 +60,7 @@ let BattleStatuses = {
 	},
 	partiallytrapped: {
 		inherit: true,
-		durationCallback(target, source) {
+		durationCallback: function (target, source) {
 			if (source.hasItem('gripclaw')) return 6;
 			return this.random(3, 7);
 		},

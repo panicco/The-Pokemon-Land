@@ -5,7 +5,7 @@ let BattleFormats = {
 	pokemon: {
 		effectType: 'ValidatorRule',
 		name: 'Pokemon',
-		onValidateSet(set, format) {
+		onValidateSet: function (set, format) {
 			let template = this.getTemplate(set.species);
 			let problems = [];
 			if (set.species === set.name) delete set.name;
@@ -42,7 +42,7 @@ let BattleFormats = {
 			// Automatically set ability to None
 			set.ability = 'None';
 
-			if (set.ivs && toID(set.item) === 'thickclub' && set.species === 'Marowak' && hasSD && (!set.level || set.level === 100)) {
+			if (set.ivs && toId(set.item) === 'thickclub' && set.species === 'Marowak' && hasSD && (!set.level || set.level === 100)) {
 				if (!set.evs) set.evs = {hp: 252, atk: 252, def: 252, spa: 252, spd: 252, spe: 252};
 				if (set.evs.atk === undefined) set.evs.atk = 252;
 				if (set.ivs.atk === undefined) set.ivs.atk = 30;
@@ -74,7 +74,7 @@ let BattleFormats = {
 			'Spore + Mean Look',
 			'Spore + Spider Web',
 		],
-		onValidateSet(set) {
+		onValidateSet: function (set) {
 			// limit one of each move in Standard
 			let moves = [];
 			if (set.moves) {

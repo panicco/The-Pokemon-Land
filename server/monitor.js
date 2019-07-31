@@ -8,8 +8,7 @@
  */
 'use strict';
 
-/** @type {typeof import('../lib/fs').FS} */
-const FS = require(/** @type {any} */('../.lib-dist/fs')).FS;
+const FS = require('../lib/fs');
 
 const MONITOR_CLEAN_TIMEOUT = 2 * 60 * 60 * 1000;
 
@@ -55,8 +54,7 @@ if (('Config' in global) &&
 	Config.loglevel = 2;
 }
 
-/** @type {typeof import('../lib/crashlogger').crashlogger} */
-let crashlogger = require(/** @type {any} */('../.lib-dist/crashlogger')).crashlogger;
+let crashlogger = require('../lib/crashlogger');
 
 const Monitor = module.exports = {
 	/*********************************************************
@@ -144,7 +142,7 @@ const Monitor = module.exports = {
 		this.battlePreps.clear();
 		this.battles.clear();
 		this.connections.clear();
-		IPTools.dnsblCache.clear();
+		Dnsbl.cache.clear();
 	},
 
 	connections: new TimedCounter(),
